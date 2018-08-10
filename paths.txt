@@ -1,0 +1,14 @@
+/list/astro-ph/new
+/list/astro-ph/recent
+/list/astro-ph.GA/new
+/list/astro-ph.GA/recent
+/list/astro-ph.CO/new
+/list/astro-ph.CO/recent
+/list/astro-ph.EP/new
+/list/astro-ph.EP/recent
+/list/astro-ph.HE/new
+/list/astro-ph.HE/recent
+/list/astro-ph.IM/new
+/list/astro-ph.IM/recent
+/list/astro-ph.SR/new
+/list/astro-ph.SR/recent
