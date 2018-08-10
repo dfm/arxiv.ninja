@@ -16,6 +16,18 @@ else:
     with open("paths.txt", "r") as f:
         paths = f.read().splitlines()
 
+header_text = """
+<div style="text-align: center; font-family: 'Comic Sans MS'; font-size: 2em;
+            padding: 20px; background-color: blue; color: yellow;">
+    Note: this is arXiv<strong>.ninja</strong> not
+    <a href="https://arxiv.org"
+        style="color: yellow;">arXiv<strong>.org</strong></a>
+    so the listings
+    have been randomly reordered.
+</div>
+"""
+header_div = html.fromstring(header_text)
+
 cache_path = "cache"
 for path in paths:
     # Attempt to load from cache
@@ -31,8 +43,25 @@ for path in paths:
     with open(fn, "rb") as f:
         content = f.read().decode("utf-8")
 
-    content = content.replace("href=\"/", "href=\"http://arxiv.org/")
+    content = content.replace(
+        "arXiv.org",
+        "<span style=\"font-family: 'Comic Sans MS';\">arXiv.ninja</span>")
+    content = content.replace("href=\"/", "href=\"https://arxiv.org/")
     tree = html.fromstring(content.encode("utf-8"))
+
+    for head in tree.xpath("//head"):
+        element = etree.Element("style")
+        element.text = """.list-title {
+    font-size: large;
+    font-weight: bold;
+    margin: .25em 0 0 0;
+    line-height: 120%;
+    font-family: "Comic Sans MS";
+}"""
+        head.insert(0, element)
+
+    for body in tree.xpath("//body"):
+        body.insert(0, header_div)
 
     for block in tree.xpath('//div[@id="dlpage"]/dl'):
         entries = []
