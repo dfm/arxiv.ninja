@@ -1,0 +1,24 @@
+language: python
+
+python:
+  - 3.6
+
+before_install:
+ - pip install requests lxml
+
+script:
+ - python script.py
+
+after_success: |
+  if [ -n "$GITHUB_API_KEY" ]; then
+    cd "$TRAVIS_BUILD_DIR"
+
+    git checkout --orphan gh-pages
+    mv output/* .
+    git rm -rf .
+    git add -f .
+    git -c user.name='travis' -c user.email='travis' commit -m 'built random arxiv listing'
+
+    # make the output quiet so the API token stays private
+    git push -q -f https://$GITHUB_USER:$GITHUB_API_KEY@github.com/$TRAVIS_REPO_SLUG gh-pages
+  fi
