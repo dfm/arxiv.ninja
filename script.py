@@ -30,5 +30,6 @@ for block in tree.xpath('//div[@id="dlpage"]/dl'):
         block.append(entry[0])
         block.append(entry[1])
 
+path = os.path.join("output", path)
 os.makedirs(path, exist_ok=True)
 open(os.path.join(path, "index.html"), "wb").write(etree.tostring(tree))
