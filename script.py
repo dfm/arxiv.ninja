@@ -19,7 +19,10 @@ else:
 header_text = """
 <div style="text-align: center; font-family: 'Comic Sans MS'; font-size: 2em;
             padding: 20px; background-color: blue; color: yellow;">
-    Note: this is arXiv<strong>.ninja</strong> not
+    Note: this is
+    <a href="https://github.com/dfm/arxiv.ninja" style="color: yellow;">
+        arXiv<strong>.ninja</strong>
+    </a> not
     <a href="https://arxiv.org"
         style="color: yellow;">arXiv<strong>.org</strong></a>
     so the listings
